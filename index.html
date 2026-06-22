@@ -25,8 +25,31 @@
   <meta name="twitter:description"
     content="AnyEXT: plataforma de anime con inteligencia artificial. Ve, gestiona y disfruta tus series favoritas." />
   <meta name="twitter:image" content="https://anyext.qzz.io/img/splash.png" />
+  <meta name="theme-color" content="#00d9c0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
 
   <title>AnyEXT - Tu mundo anime</title>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "AnyEXT",
+    "alternateName": "AnyEXT Anime",
+    "url": "https://anyext.qzz.io/",
+    "description": "AnyEXT: plataforma de anime con inteligencia artificial. Ve, gestiona y disfruta tus series favoritas con la mejor experiencia.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://anyext.qzz.io/?search={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
 
   <link rel="icon" href="./favicon.ico" type="image/x-icon" />
   <link rel="canonical" href="https://anyext.qzz.io/" />
