@@ -1,10 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AnyEXT Redir</title>
     <style>
+        :root {
+            --bg-0: #080c10;
+            --bg-1: #0d1117;
+            --bg-2: #161b22;
+            --bg-3: #21262d;
+            --bg-4: #30363d;
+
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --text-muted: #484f58;
+
+            --accent: #00d9c0;
+            --accent-dim: rgba(0, 217, 192, 0.12);
+            --accent-glow: 0 0 20px rgba(0, 217, 192, 0.35);
+            --accent-hover: #00f0d4;
+
+            --blue: #58a6ff;
+            --gold: #ffd700;
+            --danger: #f85149;
+
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --radius-xl: 24px;
+
+            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.6);
+            --shadow-heavy: 0 8px 40px rgba(0, 0, 0, 0.8);
+
+            --topbar-h: 64px;
+            --font-body: 'Outfit', sans-serif;
+            --font-jp: 'Noto Serif JP', serif;
+
+            --transition: 0.22s ease;
+        }
+
         body {
             margin: 0;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -14,29 +50,39 @@
             text-align: center;
             padding-top: 100px;
         }
+
         canvas#stars {
             position: fixed;
             top: 0;
             left: 0;
             z-index: 0;
         }
+
         .topbar {
             position: fixed;
-            top:0; left:0; right:0;
-            height:70px;
-            background:#111;
-            border-bottom:1px solid #333;
-            display:flex;
-            align-items:center;
-            padding:0 20px;
-            z-index:1050;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: #111;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 1050;
         }
-        .topbar img { height:65px; user-select:none; margin-right:auto; }
+
+        .topbar img {
+            height: 65px;
+            user-select: none;
+            margin-right: auto;
+        }
+
         #anime-info {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 15px;
             max-width: 400px;
             margin: 0 auto;
             padding: 20px;
@@ -45,25 +91,29 @@
             z-index: 1;
             position: relative;
         }
+
         #anime-info img {
             width: 100%;
             max-width: 300px;
             border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
+
         #anime-info h2 {
             font-size: 1.5rem;
             margin: 0;
             color: #fff;
         }
+
         .button-container {
             display: flex;
             flex-direction: column;
             gap: 15px;
             width: 80%;
             max-width: 250px;
-            margin: 10px;
+            margin-top: 10px;
         }
+
         .button-container button {
             padding: 12px 0;
             border: none;
@@ -73,136 +123,366 @@
             cursor: pointer;
             background: #009e87;
             color: #fff;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
             transition: all 0.2s ease-in-out;
         }
+
         .button-container button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
         }
-        .logo-svg{height:80px;flex-shrink:0;flex-grow:0;width:auto}
-        .logo-svg text{transition:fill .3s ease}
-        .logo-svg .main-text,.logo-svg .subtext{fill:white}
-        .logo-svg .ext-text{fill:#00bfff}
-        body.light-theme .logo-svg .main-text,body.light-theme .logo-svg .subtext{fill:#111}
-        body.light-theme .logo-svg .ext-text{fill:#2e94dc}
+
+        .logo {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .logo-svg {
+            height: 75px;
+            width: auto;
+        }
+
+        .logo-svg .main-text {
+            fill: var(--text-primary);
+            font-family: var(--font-body);
+        }
+
+        .logo-svg .ext-text {
+            fill: var(--accent);
+        }
+
+        .logo-svg .subtext {
+            fill: var(--text-muted);
+            font-family: var(--font-jp);
+        }
+
+        .logo-svg text {
+            transition: fill var(--transition);
+        }
+
+
+        body.light-theme .logo-svg .main-text,
+        body.light-theme .logo-svg .subtext {
+            fill: #111;
+        }
+
+        body.light-theme .logo-svg .ext-text {
+            fill: #2e94dc;
+        }
+
+        .error-msg {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .loading {
+            font-style: italic;
+            color: #aaa;
+        }
+
+        .toast-container {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            gap: 8px;
+            pointer-events: none;
+            width: max-content;
+            max-width: 92vw;
+        }
+
+        .toast-item {
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 18px;
+            border-radius: var(--radius-md);
+            background: var(--bg-2);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(16px);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            font-family: var(--font-body);
+            opacity: 0;
+            transform: translateY(16px) scale(0.96);
+            transition: none;
+            max-width: 420px;
+        }
+
+        .toast-item.toast-show {
+            animation: toastIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        .toast-item.toast-hide {
+            animation: toastOut 0.25s ease forwards;
+        }
+
+        /* Type accent borders */
+        .toast-info {
+            border-left: 3px solid var(--blue);
+        }
+
+        .toast-success {
+            border-left: 3px solid var(--accent);
+        }
+
+        .toast-warning {
+            border-left: 3px solid #ffc107;
+        }
+
+        .toast-error {
+            border-left: 3px solid var(--danger);
+        }
+
+        /* Icons per type */
+        .toast-info .toast-icon {
+            color: var(--blue);
+        }
+
+        .toast-success .toast-icon {
+            color: var(--accent);
+        }
+
+        .toast-warning .toast-icon {
+            color: #ffc107;
+        }
+
+        .toast-error .toast-icon {
+            color: var(--danger);
+        }
+
+        .toast-icon {
+            font-size: 1.05rem;
+            flex-shrink: 0;
+        }
+
+        .toast-msg {
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            padding: 4px;
+            cursor: pointer;
+            transition: color var(--transition);
+            flex-shrink: 0;
+        }
+
+        .toast-close:hover {
+            color: var(--text-primary);
+        }
+
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px) scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes toastOut {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(-12px) scale(0.96);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .toast-container {
+                bottom: 72px;
+                left: 8px;
+                right: 8px;
+                transform: none;
+                width: auto;
+                max-width: none;
+            }
+
+            .toast-item {
+                max-width: 100%;
+            }
+        }
     </style>
+    <link href="./static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./static/font-awesome/all.min.css" rel="stylesheet" />
+    <link href="./static/bootstrap/css/bootstrap-icons.css" rel="stylesheet" />
 </head>
+
 <body>
 
-<canvas id="stars"></canvas>
+    <canvas id="stars"></canvas>
 
-<header class="topbar">
-    <a href="/" class="logo">
-        <svg viewBox="0 0 300 120" class="logo-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-            <text x="10" y="60" font-family="Alice, serif" font-size="36" font-weight="bold">
-                <tspan class="main-text">Anime </tspan>
-                <tspan class="ext-text">EXT</tspan>
-            </text>
-            <path d="M220,30 L230,60 L220,90" stroke="#3C873A" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-            <text x="100" y="90" text-anchor="middle" font-family="sans-serif" font-size="14" class="subtext">アニメが好きな私たち</text>
-        </svg>
-    </a>
-</header>
+    <header class="topbar">
+        <a href="/" class="logo">
+            <svg viewBox="0 0 260 80" class="logo-svg" xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="xMidYMid meet">
+                <text x="8" y="44" font-family="Outfit, sans-serif" font-size="34" font-weight="800"
+                    letter-spacing="-1">
+                    <tspan class="main-text">Any </tspan>
+                    <tspan class="ext-text">EXT</tspan>
+                </text>
+                <text x="8" y="66" font-family="Noto Serif JP, serif" font-size="12" class="subtext">アニメが好きな私たち</text>
+            </svg>
+        </a>
+    </header>
 
-<div id="anime-info">
-    <!-- Contenido generado dinámicamente -->
-</div>
+    <div id="anime-info">
+        <p class="loading">Cargando información del anime...</p>
+    </div>
+    <script src="static/toast.js"></script>
+    <script>
+        // --- Fondo Estrellado ---
+        const canvas = document.getElementById('stars');
+        const ctx = canvas.getContext('2d');
 
-<script>
-    // Fondo estrellado
-    const canvas = document.getElementById('stars');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const stars = Array.from({length: 200}, () => ({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        r: Math.random()*1.2,
-        d: Math.random()*0.5
-    }));
-
-    function drawStars(){
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle='#fff';
-        stars.forEach(s=>{
-            ctx.beginPath();
-            ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-            ctx.fill();
-            s.y += s.d;
-            if(s.y>canvas.height){s.y=0; s.x=Math.random()*canvas.width;}
-        });
-        requestAnimationFrame(drawStars);
-    }
-    drawStars();
-    window.addEventListener('resize', ()=>{
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
-
-    // Redirección adaptada
-    let fullAnimeList = [];
-
-    async function fetchJsonList() {
-        try {
-            const resp = await fetch('/anime/list/ext/beta/cordova/beta/anime/app/chikyqwe');
-            if (!resp.ok) throw new Error('Error al cargar la lista de animes');
-            const json = await resp.json();
-            fullAnimeList = Array.isArray(json.animes) ? json.animes : [];
-            handleRedirect();
-        } catch (err) {
-            console.error("Error cargando lista:", err);
-            document.getElementById("anime-info").innerText = "Error cargando lista.";
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
-    }
+        resizeCanvas();
 
-    function getParams() {
-        const params = new URLSearchParams(window.location.search);
-        return {
-            uid: params.get("uid"),
-            title: params.get("title")
-        };
-    }
+        const stars = Array.from({ length: 200 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 1.2,
+            d: Math.random() * 0.5
+        }));
 
-    function openAnyExtApp(uid, title) {
-        const appUrl = `anyext:///anime?uid=${uid}&title=${encodeURIComponent(title)}`;
-        const timeout = setTimeout(() => {
-            alert("No se pudo abrir la app. Por favor, abre AnyEXT manualmente.");
-        }, 2000);
-        window.location = appUrl;
-        window.addEventListener("blur", () => clearTimeout(timeout));
-    }
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#fff';
+            stars.forEach(s => {
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fill();
+                s.y += s.d;
+                if (s.y > canvas.height) {
+                    s.y = 0;
+                    s.x = Math.random() * canvas.width;
+                }
+            });
+            requestAnimationFrame(drawStars);
+        }
+        drawStars();
+        window.addEventListener('resize', resizeCanvas);
 
-    function handleRedirect() {
-        const { uid } = getParams();
-        const div = document.getElementById("anime-info");
-        if (!uid) {
-            div.innerText = "Falta parámetro uid";
-            return;
+
+        // --- Lógica de Redirección y Búsqueda ---
+        function getParams() {
+            const params = new URLSearchParams(window.location.search);
+            return { uid: params.get("uid") };
         }
 
-        const anime = fullAnimeList.find(a => String(a.unit_id) === String(uid));
-        if (!anime) {
-            div.innerText = "Anime no encontrado.";
-            return;
+        function openAnyExtApp(uid, title) {
+            const appUrl = `anyext:///anime?uid=${uid}&title=${encodeURIComponent(title)}`;
+            const timeout = setTimeout(() => {
+                Toast.show("No se detectó la app. Redirigiendo a la web... En 2 segundos", "error", 3000);
+                setTimeout(() => {window.location.href = `/?anim=${uid}`;}, 2000);
+            }, 2000);
+            window.location = appUrl;
+            window.addEventListener("blur", () => clearTimeout(timeout));
         }
 
-        const webUrl = "https://anyext-m5lt.onrender.com/?shared=" + anime.unit_id;
-        document.title = anime.title
+        // Procesa la respuesta binaria convirtiéndola en una URL local de tipo Blob
+        async function fetchAnimeImage(uid) {
+            try {
+                const resp = await fetch('/anime/img', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        type: "cover",
+                        uid: Number(uid)
+                    })
+                });
+                if (!resp.ok) throw new Error();
 
-        div.innerHTML = `
-        <h2>${anime.title}</h2>
-        <img src="${anime.image}" alt="${anime.title}">
-        <div class="button-container">
-          <button onclick="openAnyExtApp(${anime.unit_id}, '${anime.title}')">Ver en la App</button>
-          <button onclick="window.open('${webUrl}', '_blank')">Ver en la Web</button>
-        </div>
-    `;
-    }
+                // Recibimos la respuesta como binario raw (blob)
+                const blob = await resp.blob();
 
-    fetchJsonList();
-</script>
+                // Generamos un objectURL temporal listo para usar en la etiqueta <img>
+                return URL.createObjectURL(blob);
+            } catch (err) {
+                console.error("No se pudo cargar la imagen binaria.");
+                return 'https://via.placeholder.com/300x450?text=No+Image';
+            }
+        }
 
+        async function fetchAnimeData() {
+            const div = document.getElementById("anime-info");
+            const { uid } = getParams();
+
+            if (!uid) {
+                div.innerHTML = `<p class="error-msg">Falta el parámetro "uid" en la URL.</p>`;
+                return;
+            }
+
+            try {
+                // 1. Obtener metadatos
+                const resp = await fetch('/anime/search', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        query: `:$unit_id:${uid}`
+                    })
+                });
+
+                if (!resp.ok) throw new Error('Error en la respuesta del servidor');
+
+                const json = await resp.json();
+                const anime = Array.isArray(json) ? json[0] : null;
+
+                if (!anime) {
+                    div.innerHTML = `<p class="error-msg">Anime no encontrado.</p>`;
+                    return;
+                }
+
+                document.title = anime.title;
+
+                // 2. Traer el binario de la imagen y transformarlo a URL utilizable
+                const coverImageBlobUrl = await fetchAnimeImage(anime.uid || uid);
+
+                // 3. Renderizar todo
+                div.innerHTML = `
+                <h2>${anime.title}</h2>
+                <img src="${coverImageBlobUrl}" alt="${anime.title}">
+                <div class="button-container">
+                  <button id="btn-app">Ver en la App</button>
+                  <button id="btn-web">Ver en la Web</button>
+                </div>
+            `;
+
+                const webUrl = `/?anim=${anime.unit_id}`;
+                document.getElementById('btn-app').addEventListener('click', () => openAnyExtApp(anime.unit_id, anime.title));
+                document.getElementById('btn-web').addEventListener('click', () => window.open(webUrl, '_blank'));
+
+            } catch (err) {
+                console.error("Error cargando anime:", err);
+                div.innerHTML = `<p class="error-msg">Error al conectar con el servidor.</p>`;
+            }
+        }
+
+        fetchAnimeData();
+    </script>
 </body>
+
 </html>

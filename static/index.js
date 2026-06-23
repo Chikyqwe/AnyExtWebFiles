@@ -67,7 +67,10 @@ const Utils = {
     const raw = new URLSearchParams(window.location.search).get('page');
     return /^[1-9]\d*$/.test(raw) ? parseInt(raw, 10) : 1;
   },
-
+  getAnimParam() {
+    const raw = new URLSearchParams(window.location.search).get('anim');
+    return /^[1-9]\d*$/.test(raw) ? parseInt(raw, 10) : null;
+  },
   /** Slice an array for a given page */
   paginate(items, page, perPage = CONFIG.PER_PAGE) {
     const start = (page - 1) * perPage;
@@ -671,7 +674,7 @@ const Cards = {
 
     card.addEventListener('click', () => {
       if (longPress) return;
-      window.location.href = `./player?uid=${anime.id}&ep=${anime.episodioNum}`;
+      window.location.href = `/player/${anime.id}/${anime.episodioNum}`;
     });
 
     card.innerHTML = `
@@ -1846,6 +1849,7 @@ async function main() {
       try {
         Progress.set(20);
         const page = Utils.getPageParam();
+        const shared = Utils.getAnimParam();
 
         // ← Nuevo: usa fetchAnimeList con paginación
         const listData = await fetchAnimeList(page);
@@ -1864,6 +1868,9 @@ async function main() {
         } else {
           Cards.render(listData.items, 'card-container');
           Pagination.create(listData.totalPages, page);
+        }
+        if (shared) {
+          Modal.open(shared);
         }
 
         Progress.set(70);
