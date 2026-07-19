@@ -15,17 +15,16 @@
 const CONFIG = {
   API: {
     LAST: '/anime/last',
-    LIST: '/anime/list',
+    LIST: '/api/list',
     INFO: '/api/info',
-    IMAGE: '/anime/img',
-    SEARCH: '/anime/search',
+    IMAGE: '/api/img',
+    SEARCH: '/api/search',
     IMAGE_PROXY: (url) => `/image?url=${encodeURIComponent(url)}`,
   },
   DB: {
     FAVORITES: { name: 'FavoritosDB', version: 1, store: 'favoritos' },
     CACHE: { name: 'AnimeCacheDB', version: 3, store: 'precached' },
   },
-  EPISODE_SOURCES: ['FLV', 'TIO', 'ANIMEYTX'],
   PER_PAGE: 24,
   MIN_LOAD_MS: 3000,
   SEARCH_DEBOUNCE_MS: 250,

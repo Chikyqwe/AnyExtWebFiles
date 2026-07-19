@@ -24,7 +24,7 @@ const CONFIG = {
   BLUR: { scale: 0.1, fps: 60 },
   API: {
     LAST: '/anime/last',
-    LIST: '/anime/list',
+    LIST: '/api/list',
     DESCRIPTION: '/api/description',
     EPISODES: '/api/episodes',
     IMAGE_PROXY: (url) => `/image?url=${encodeURIComponent(url)}`,
