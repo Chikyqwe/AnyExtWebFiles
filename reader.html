@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{TITLE}}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --surface: rgba(20, 26, 40, 0.7);
+      --border: rgba(255, 255, 255, 0.1);
+      --accent: rgba(0, 217, 192, 1);
+      --accent-gradient: linear-gradient(135deg, rgba(0, 217, 192, 1) 0%, #00a896 100%);
+      --text: #f0f6fc;
+      --muted: #a3b3cc;
+      --font: 'Outfit', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+      overflow-x: hidden;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Animated background gradient blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: 0;
+      opacity: 0.5;
+      animation: floatBlob 10s infinite alternate ease-in-out;
+    }
+
+    .blob-1 {
+      top: -10%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: rgba(0, 217, 192, 0.2);
+    }
+
+    .blob-2 {
+      bottom: -10%;
+      right: -10%;
+      width: 350px;
+      height: 350px;
+      background: rgba(0, 217, 192, 0.2);
+      animation-delay: -5s;
+    }
+
+    @keyframes floatBlob {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(50px, 30px) scale(1.1);
+      }
+    }
+
+    .container {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 3rem;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: containerIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes containerIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .cover-wrapper {
+      position: relative;
+      width: 235px;
+      height: 230px;
+      margin: 0 auto 2rem;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+      animation: imgIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+
+    .cover-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      pointer-events: none;
+    }
+
+    .manga-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .container:hover .manga-cover {
+      transform: scale(1.05);
+    }
+
+    @keyframes imgIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      animation: slideUp 0.6s ease-out 0.4s both;
+    }
+
+    .message-text {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+      animation: slideUp 0.6s ease-out 0.5s both;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--accent-gradient);
+      color: #0b0f19;
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 16px 32px;
+      border-radius: 99px;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(0, 217, 192, 0.35);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 100%;
+      animation: slideUp 0.6s ease-out 0.6s both;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 35px rgba(0, 217, 192, 0.55);
+    }
+
+    .download-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      margin-top: 1.5rem;
+      transition: color 0.3s ease;
+      animation: slideUp 0.6s ease-out 0.7s both;
+    }
+
+    .back-btn:hover {
+      color: var(--text);
+    }
+
+    .back-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 2.5rem 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .cover-wrapper {
+        width: 140px;
+        height: 200px;
+      }
+
+      .download-btn {
+        padding: 14px 24px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="container">
+    <div class="cover-wrapper">
+      <img src="{{COVER_URL}}" alt="Portada de Manga" class="manga-cover" onerror="this.src='/err.png'" />
+    </div>
+
+    <h1>{{TITLE}}</h1>
+    <p class="message-text">{{DESC}}</p>
+
+    <a href="/app" class="download-btn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 16L7 11l1.4-1.4 2.6 2.6V4h2v8.2l2.6-2.6L17 11l-5 5zm-6 4v-2h12v2H6z" />
+      </svg>
+      Descargar App
+    </a>
+
+    <a href="/" class="back-btn" onclick="if(window.history.length > 1) { window.history.back(); return false; }">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+      </svg>
+      Regresar
+    </a>
+  </div>
+</body>
+
+</html>

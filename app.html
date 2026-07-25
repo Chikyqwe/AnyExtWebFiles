@@ -5,23 +5,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AnyExt - App</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Outfit:wght@300;400;600;700;800&display=swap"
+    rel="stylesheet">
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-  <meta name="description" content="AnyExt: app móvil para ver tus animes favoritos en alta calidad" />
-  <meta name="keywords" content="anime, app, streaming, ver anime, Android, AnyEXT" />
+  <meta name="description"
+    content="AnyExt: app móvil para ver tus animes, mangas y doramas favoritos en alta calidad" />
+  <meta name="keywords" content="anime, manga, doramas, lector, app, streaming, ver anime, Android, AnyEXT" />
   <meta name="author" content="AnyEXT Team" />
   <meta name="robots" content="index, follow" />
   <link rel="icon" href="./favicon.ico" type="image/x-icon" />
   <link rel="canonical" href="https://anyext.qzz.io/app" />
 
   <style>
+    :root {
+      --bg: #0b0f19;
+      --surface: rgba(20, 26, 40, 0.7);
+      --surface-card: rgba(22, 30, 46, 0.85);
+      --border: rgba(255, 255, 255, 0.08);
+      --accent: #00d9c0;
+      --accent-gradient: linear-gradient(135deg, #00d9c0 0%, #00a896 100%);
+      --text: #f0f6fc;
+      --muted: #a3b3cc;
+      --font-main: 'Outfit', sans-serif;
+      --font-jp: 'Noto Serif JP', serif;
+    }
+
     body,
     html {
       margin: 0;
       padding: 0;
       height: 100%;
-      background: #121212;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
       overflow-x: hidden;
     }
 
@@ -30,183 +53,243 @@
       top: 0;
       left: 0;
       z-index: 0;
+      pointer-events: none;
     }
 
-    .navbar {
-      z-index: 10;
-      background-color: rgba(18, 18, 18, 0.95);
-    }
-
-    .navbar-brand img {
-      height: 40px;
-    }
-
-    header {
-      padding: 100px 20px 40px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    header h1 {
-      color: #00fa9a;
-      font-size: 2.8rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      color: #b0b0b0;
-      margin-bottom: 30px;
-    }
-
-    .download-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 18px 45px;
-      background-color: #00fa9a;
-      color: #121212;
-      font-weight: 600;
-      font-size: 1.3rem;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .download-btn:hover {
-      background-color: #00c17c;
-      color: #fff;
-    }
-
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 25px;
-      margin: 60px 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    .feature-card {
-      background-color: #1e1e1e;
-      border-radius: 15px;
-      padding: 30px 20px;
-      width: 240px;
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
-      color: #ffff;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0px 8px 25px rgba(0, 250, 154, 0.4);
-    }
-
-    .feature-card i {
-      font-size: 2.2rem;
-      color: #00fa9a;
-      margin-bottom: 15px;
-    }
-
-    .carousel-item img {
-      max-height: 600px;
-      margin: 0 auto;
-      border-radius: 20px;
-      object-fit: contain;
-    }
-
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-      background-color: #00ff9d;
-      border-radius: 50%;
-      padding: 10px;
-    }
-
-    .carousel-indicators [data-bs-target] {
-      background-color: #00fa9a;
-      top: 0;
-    }
-
-    .carousel-indicators {
-      top: 0;
-    }
-
-    .hero-badge {
-      background-color: #00fa9a;
-      color: #121212;
-      padding: 12px 20px;
-      border-radius: 30px;
-      font-weight: 600;
-      display: inline-block;
-      margin-bottom: 20px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      border-top: 1px solid #2c2c2c;
-      color: #888;
-      position: relative;
-      z-index: 1;
-    }
-
-    footer a i:hover {
-      color: #00f2fa;
-    }
-
-    .logo-svg {
-      height: 80px;
-      flex-shrink: 0;
-      flex-grow: 0;
-      width: auto
-    }
-
-    .logo-svg text {
-      transition: fill .3s ease
-    }
-
-    .logo-svg .main-text,
-    .logo-svg .subtext {
-      fill: white
-    }
-
-    .logo-svg .ext-text {
-      fill: #00bfff
-    }
-
-    body.light-theme .logo-svg .main-text,
-    body.light-theme .logo-svg .subtext {
-      fill: #111
-    }
-
-    body.light-theme .logo-svg .ext-text {
-      fill: #2e94dc
-    }
-
+    /* Topbar */
     .topbar {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      height: 70px;
-      background: #181818;
-      border-bottom: 1px solid #333;
+      height: 75px;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
-      padding: 0 20px;
+      padding: 0 2rem;
       gap: 20px;
-      z-index: 1050
+      z-index: 1050;
     }
 
-    .topbar img {
-      height: 65px;
-      user-select: none;
-      margin-right: auto;
-      flex-shrink: 0
+    .logo-svg {
+      height: 60px;
+      width: auto;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .logo-svg .main-text {
+      fill: var(--text);
+      font-family: var(--font-main);
+    }
+
+    .logo-svg .ext-text {
+      fill: var(--accent);
+      font-family: var(--font-main);
+    }
+
+    .logo-svg .subtext {
+      fill: var(--muted);
+      font-family: var(--font-jp);
+    }
+
+    /* Hero Section */
+    header.hero {
+      padding: 140px 20px 60px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      background: rgba(0, 217, 192, 0.12);
+      color: var(--accent);
+      border: 1px solid rgba(0, 217, 192, 0.3);
+      padding: 8px 22px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-block;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+
+    header.hero h1 {
+      color: var(--text);
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+
+    header.hero h1 span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header.hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 35px;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 42px;
+      background: var(--accent-gradient);
+      color: #0b0f19;
+      font-weight: 800;
+      font-size: 1.15rem;
+      border-radius: 99px;
+      text-decoration: none;
+      box-shadow: 0 8px 30px rgba(0, 217, 192, 0.35);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0, 217, 192, 0.55);
+      color: #0b0f19;
+    }
+
+    .download-btn i {
+      font-size: 1.3rem;
+    }
+
+    /* Features Section */
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      margin: 40px auto 70px;
+      max-width: 1200px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 35px 25px;
+      width: 280px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 217, 192, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 217, 192, 0.15);
+    }
+
+    .feature-card i {
+      font-size: 2.4rem;
+      color: var(--accent);
+      margin-bottom: 18px;
+      display: inline-block;
+    }
+
+    .feature-card h3 {
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Mockup/Screenshots Section */
+    .mockup {
+      position: relative;
+      z-index: 1;
+    }
+
+    .mockup h2 {
+      color: var(--text);
+      font-weight: 800;
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    .carousel-item img {
+      max-height: 550px;
+      margin: 0 auto;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      object-fit: contain;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      background-color: var(--accent);
+      border-radius: 50%;
+      padding: 12px;
+      background-size: 50%;
+      filter: invert(1);
+    }
+
+    .carousel-indicators [data-bs-target] {
+      background-color: var(--accent);
+      border-radius: 10px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      color: var(--muted);
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--accent) !important;
+    }
+
+    @media (max-width: 768px) {
+      header.hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .download-btn {
+        width: 100%;
+        padding: 14px 28px;
+        font-size: 1.05rem;
+      }
+
+      .feature-card {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -215,51 +298,78 @@
 
   <canvas id="stars"></canvas>
 
-  <!-- 🔹 Nueva Topbar -->
+  <!-- Topbar -->
   <header class="topbar d-flex align-items-center">
-    <a href="/" class="logo">
+    <a href="/" class="logo text-decoration-none">
       <svg viewBox="0 0 260 80" class="logo-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-        <text x="8" y="44" font-family="Outfit, sans-serif" font-size="34" font-weight="800" letter-spacing="-1">
-          <tspan class="main-text" fill="#f0f6fc">Any </tspan>
-          <tspan class="ext-text" fill="#00d9c0">EXT</tspan>
+        <text x="8" y="44" font-size="34" font-weight="800" letter-spacing="-1">
+          <tspan class="main-text">Any </tspan>
+          <tspan class="ext-text">EXT</tspan>
         </text>
-        <text x="8" y="66" fill="#484f58" font-family="Noto Serif JP, serif" font-size="12"
-          class="subtext">アニメが好きな私たち</text>
+        <text x="8" y="66" font-size="12" class="subtext">アニメが好きな私たち</text>
       </svg>
     </a>
   </header>
 
+  <!-- Hero -->
   <header class="hero">
-    <span class="hero-badge">¡No necesitas navegador!</span>
-    <h1>AnyExt App</h1>
-    <p>Abre la app y empieza a ver tus animes favoritos al instante, rápida, ligera y siempre a la mano. AnyExt App
-      {version}</p>
+    <span class="hero-badge"><i class="bi bi-shield-check me-1"></i> ¡No necesitas navegador!</span>
+    <h1>Experiencia Anime con <span>AnyExt App</span></h1>
+    <p>Abre la app y empieza a ver tus animes y mangas favoritos al instante, rápida, ligera y siempre a la mano. AnyExt
+      App {version}</p>
     <a href="#" class="download-btn">
       <i class="bi bi-download"></i> Descargar APK
     </a>
   </header>
 
+  <!-- Features -->
   <section class="features">
+    <!-- Card Rediseño -->
+    <div class="feature-card">
+      <i class="bi bi-palette-fill"></i>
+      <h3>Nuevo Rediseño</h3>
+      <p>Interfaz moderna y fluida con navegación rápida e intuitiva.</p>
+    </div>
+
+    <!-- Card Lector -->
+    <div class="feature-card">
+      <i class="bi bi-book-half"></i>
+      <h3>Lector de Manga</h3>
+      <p>Lee tus mangas favoritos directamente en la app con control de capítulos.</p>
+    </div>
+
+    <!-- Card Doramas Próximamente -->
+    <div class="feature-card">
+      <i class="bi bi-tv-fill"></i>
+      <h3>Doramas (Próximamente)</h3>
+      <p>Pronto podrás disfrutar del mejor catálogo de doramas integrados directamente.</p>
+    </div>
+
+    <!-- Card Rápida -->
     <div class="feature-card">
       <i class="bi bi-speedometer2"></i>
-      <h3>Rápida</h3>
-      <p>Optimizada para cargar los episodios.</p>
+      <h3>Rápida y Ligera</h3>
+      <p>Optimizada al máximo para la reproducción e imágenes al instante.</p>
     </div>
+
+    <!-- Card Modo Oscuro -->
     <div class="feature-card">
       <i class="bi bi-moon-stars-fill"></i>
       <h3>Modo Oscuro</h3>
-      <p>Ver anime de noche sin cansar la vista.</p>
+      <p>Diseño enfocado en cuidar tu vista en maratones nocturnas.</p>
     </div>
+
+    <!-- Card Exclusividades -->
     <div class="feature-card">
-      <!-- FUNCIONES EXCLUSIVAS -->
       <i class="bi bi-star-fill"></i>
-      <h3>Funciones Exclusivas</h3>
-      <p>Funciones exclusivas en la app para mejorar su experiencia.</p>
+      <h3>Exclusividades</h3>
+      <p>Aprovecha las herramientas integradas solo en la app oficial.</p>
     </div>
   </section>
 
+  <!-- Screenshots -->
   <section class="mockup my-5 text-center">
-    <h2 style="color:#00fa9a; margin-bottom:30px;">Capturas de la App</h2>
+    <h2>Capturas de la App</h2>
     <div id="screenshotsCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner" id="carousel-inner"></div>
       <button class="carousel-control-prev" type="button" data-bs-target="#screenshotsCarousel" data-bs-slide="prev">
@@ -270,84 +380,81 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Siguiente</span>
       </button>
+      <div class="carousel-indicators mt-4" id="carousel-indicators" style="position: relative; margin-bottom: 0;">
+      </div>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
-    <div class="carousel-indicators" id="carousel-indicators"></div>
-    AnyExt © 2026 ·
-    <a href="https://github.com/Chikyqwe/AnyExt/" target="_blank" class="text-decoration-none text-secondary"
-      style="position: relative; z-index: 10000000000;">
-      <i class="bi bi-github" style="font-size: 1.5rem;"></i>
-    </a>
+    <div class="container">
+      AnyExt © 2026 ·
+      <a href="https://github.com/Chikyqwe/AnyExt/" target="_blank" class="text-decoration-none ms-2">
+        <i class="bi bi-github" style="font-size: 1.2rem; vertical-align: middle;"></i>
+      </a>
+    </div>
   </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Función para actualizar la info de la app y el carrusel
     async function updateAppInfo() {
       try {
-        // 1️⃣ Obtener versión actual
         const res = await fetch('/app/v');
         if (!res.ok) throw new Error('Error al obtener la versión');
         const data = await res.json();
         const actual = data.actual;
 
-        // Actualizar botón de descarga y texto de versión
         const downloadBtn = document.querySelector('.download-btn');
         const heroText = document.querySelector('header.hero p');
         if (actual && actual.code) {
           const urlFetch = await fetch('/app/v?version=' + actual.code);
           const urlData = await urlFetch.json();
           downloadBtn.href = urlData.url;
-          heroText.textContent = `Abre la app y empieza a ver tus animes favoritos al instante, rápida, ligera y siempre a la mano. AnyExt App ${actual.version}`;
+          heroText.textContent = `Abre la app y empieza a ver tus animes y mangas favoritos al instante, rápida, ligera y siempre a la mano. AnyExt App ${actual.version}`;
         } else {
           downloadBtn.href = '#';
           console.warn('No hay versión actual disponible.');
         }
 
-        // 2️⃣ Obtener screenshots del endpoint
-        const screenshotsRes = await fetch('/app/screenshots');
-        if (!screenshotsRes.ok) throw new Error('Error al obtener screenshots');
-        const screenshots = await screenshotsRes.json();
-
-        // 3️⃣ Construir carrusel dinámico
         const carouselInner = document.getElementById('carousel-inner');
         const carouselIndicators = document.getElementById('carousel-indicators');
         carouselInner.innerHTML = '';
         carouselIndicators.innerHTML = '';
 
-        screenshots.forEach((name, index) => {
-          const imgUrl = `/app/images/${name}`;
+        // Generamos dinámicamente el arreglo de 14 imágenes en formato Hexadecimal (0x0001 hasta 0x000E)
+        const totalScreenshots = 14;
+        const extension = 'png'; // Cambia a 'jpg' o la extensión que estés usando
 
-          // Item del carrusel
+        for (let index = 0; index < totalScreenshots; index++) {
+          // Convierte (index + 1) a Hexadecimal de 4 dígitos en mayúsculas (ej: 1 -> 0x0001, 10 -> 0x000A)
+          const hexName = '0x' + (index + 1).toString(16).toUpperCase().padStart(4, '0');
+          const imgUrl = `/img/app/${hexName}.${extension}`;
+
           const item = document.createElement('div');
           item.className = 'carousel-item' + (index === 0 ? ' active' : '');
           const img = document.createElement('img');
           img.src = imgUrl;
           img.className = 'd-block w-75';
-          img.alt = `Screenshot ${index + 1}`;
+          img.alt = `Screenshot ${hexName}`;
           item.appendChild(img);
           carouselInner.appendChild(item);
 
-          // Indicador del carrusel
           const indicator = document.createElement('button');
           indicator.type = 'button';
           indicator.setAttribute('data-bs-target', '#screenshotsCarousel');
           indicator.setAttribute('data-bs-slide-to', index);
           if (index === 0) indicator.className = 'active';
           carouselIndicators.appendChild(indicator);
-        });
+        }
 
       } catch (err) {
         console.error('No se pudo actualizar la app:', err);
       }
     }
 
-    // Ejecutar al cargar
     updateAppInfo();
 
-
-    // 🔹 Fondo estrellado
+    // Background Estrellas
     const canvas = document.getElementById('stars');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -362,7 +469,7 @@
 
     function drawStars() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#fff';
+      ctx.fillStyle = 'rgba(240, 246, 252, 0.8)';
       stars.forEach(s => {
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
@@ -379,9 +486,6 @@
       canvas.height = window.innerHeight;
     });
   </script>
-
-
-
 </body>
 
 </html>

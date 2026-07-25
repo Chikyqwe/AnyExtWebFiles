@@ -1232,12 +1232,12 @@ const Modal = {
     `;
 
     container.appendChild(statusDiv);
+    const dep = data.episodes || data.chapters;
+    if (!dep?.length) return;
 
-    if (!data.episodes?.length) return;
-
-    const list = data.episodes.length < 50
-      ? [...data.episodes].reverse()
-      : data.episodes;
+    const list = dep.length < 50
+      ? [...dep].reverse()
+      : dep;
 
     list.forEach(ep => {
       const btn = document.createElement('button');
