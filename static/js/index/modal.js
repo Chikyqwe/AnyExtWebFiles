@@ -246,9 +246,9 @@ const Modal = {
       // Listener para redireccionar según corresponda
       btn.addEventListener('click', () => {
         if (!isManga) {
-          window.location.href = `./player.html/${encodeURIComponent(data.uid)}/${item.num}`;
+          window.location.href = `./player/static/css/s/${encodeURIComponent(data.uid)}/${item.num}`;
         } else {
-          window.location.href = `./reader.html/${encodeURIComponent(data.uid)}/${item.num}`;
+          window.location.href = `./reader/static/css/s/${encodeURIComponent(data.uid)}/${item.num}`;
 
         }
       });
