@@ -1,5 +1,5 @@
 /* =========================================
-   AnyEXT — Share modal styles
+   AnimeEXT — Share modal styles
    ========================================= */
 
 .modal-share {
@@ -23,7 +23,7 @@
 
 .modal-share__container {
   background: var(--bg-2);
-  border: 1px solid rgba(255,255,255,0.09);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   width: 94%;
   max-width: 500px;
   border-radius: 20px 20px 0 0;
@@ -34,7 +34,9 @@
   position: relative;
 }
 
-.modal-share.active .modal-share__container { transform: translateY(0); }
+.modal-share.active .modal-share__container {
+  transform: translateY(0);
+}
 
 /* Handle indicator */
 .modal-share__container::before {
@@ -66,7 +68,9 @@
   transition: color var(--transition);
 }
 
-.modal-share__close:hover { color: var(--text-primary); }
+.modal-share__close:hover {
+  color: var(--text-primary);
+}
 
 /* ── Share options scroll ── */
 .share-options-wrapper {
@@ -84,17 +88,21 @@
   scrollbar-width: none;
 }
 
-.share-options::-webkit-scrollbar { display: none; }
+.share-options::-webkit-scrollbar {
+  display: none;
+}
 
 .scroll-btn {
   position: absolute;
-  right: 0; top: 50%;
+  right: 0;
+  top: 50%;
   transform: translateY(-50%);
   background: rgba(22, 27, 34, 0.9);
   border: 1px solid var(--bg-4);
   color: var(--text-primary);
   border-radius: 50%;
-  width: 32px; height: 32px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -102,8 +110,16 @@
   transition: all var(--transition);
 }
 
-.scroll-btn.hidden { opacity: 0; pointer-events: none; }
-.scroll-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg-0); }
+.scroll-btn.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scroll-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg-0);
+}
 
 /* ── Option items ── */
 .share-option {
@@ -111,7 +127,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: var(--text-secondary);
+  color: #ffffff;
   text-decoration: none;
   font-size: 0.78rem;
   width: 68px;
@@ -119,8 +135,15 @@
   transition: color var(--transition);
 }
 
-.share-option:hover { color: var(--text-primary); }
-.share-option:focus, .share-option:active { color: inherit; outline: none; }
+.share-option:hover {
+  color: var(--text-primary);
+}
+
+.share-option:focus,
+.share-option:active {
+  color: inherit;
+  outline: none;
+}
 
 .share-option__icon {
   width: 54px;
@@ -133,15 +156,39 @@
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.share-option:hover .share-option__icon { transform: scale(1.1); box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
+.share-option:hover .share-option__icon {
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
 
-.whatsapp  { background: #25D366; }
-.facebook  { background: #1877F2; }
-.correo    { background: #555; }
-.pinterest { background: #E60023; }
-.telegram  { background: #0088cc; }
-.reddit    { background: #ff4500; }
-.x         { background: #1a1a1a; border: 1px solid #333; }
+.whatsapp {
+  background: #25D366;
+}
+
+.facebook {
+  background: #1877F2;
+}
+
+.correo {
+  background: #555;
+}
+
+.pinterest {
+  background: #E60023;
+}
+
+.telegram {
+  background: #0088cc;
+}
+
+.reddit {
+  background: #ff4500;
+}
+
+.x {
+  background: #1a1a1a;
+  border: 1px solid #333;
+}
 
 /* ── Link / copy ── */
 .modal-share__link-box {
@@ -175,4 +222,6 @@
   font-family: var(--font-body);
 }
 
-.modal-share__copy-btn:hover { background: var(--accent-hover); }
+.modal-share__copy-btn:hover {
+  background: var(--accent-hover);
+}

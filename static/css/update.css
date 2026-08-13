@@ -1,0 +1,102 @@
+/* ===== Fondo del modal ===== */
+.modal-update {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s;
+  z-index: 9999;
+}
+
+.modal-update.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===== Contenedor modal ===== */
+.modal-update__container {
+  background: #1e1e1e;
+  width: 85%;
+  max-width: 460px;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4);
+  padding: 24px;
+  transform: translateY(100%);
+  transition: transform 0.35s ease;
+  position: relative;
+  text-align: center;
+}
+
+.modal-update.active .modal-update__container {
+  transform: translateY(0);
+}
+
+.modal-update__icon {
+  font-size: 2.8rem;
+  color: #3ea6ff;
+  margin-bottom: 12px;
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.modal-update__title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.modal-update__desc {
+  font-size: 0.95rem;
+  color: #ccc;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.modal-update__version {
+  background: #2a2a2a;
+  border: 1px solid #333;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #3ea6ff;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.modal-update__btn {
+  display: block;
+  width: 100%;
+  background: #3ea6ff;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 0;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.25s ease;
+}
+
+.modal-update__btn:hover {
+  background: #2b8fe6;
+}
+
+/* Sin botón de cerrar */
+.modal-update__close {
+  display: none;
+}

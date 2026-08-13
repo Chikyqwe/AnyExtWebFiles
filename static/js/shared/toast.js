@@ -1,14 +1,7 @@
 'use strict';
 
 /**
- * Toast — lightweight reusable notification system.
- *
- * Usage:
- *   Toast.show('Guardado correctamente');                       // default (info)
- *   Toast.show('Error al cargar', 'error');                     // red
- *   Toast.show('Operación exitosa', 'success');                 // green
- *   Toast.show('Cuidado', 'warning');                           // amber
- *   Toast.show('Mensaje', 'info', 5000);                       // custom duration
+ * Toast — lightweight reusable notification system with progress bar.
  */
 const Toast = (() => {
   const ICONS = {
@@ -47,12 +40,18 @@ const Toast = (() => {
     toast.className = `toast-item toast-${type}`;
     toastMap.set(uid, toast);
 
+    // Renderizamos la barra de progreso solo si tiene tiempo de vida (duration > 0)
+    const progressBarHtml = duration > 0
+      ? `<div class="toast-progress" style="--duration: ${duration}ms"></div>`
+      : '';
+
     toast.innerHTML = `
       <i class="${ICONS[type] || ICONS.info} toast-icon"></i>
       <span class="toast-msg">${message}</span>
       <button class="toast-close" aria-label="Cerrar">
         <i class="fa fa-xmark"></i>
       </button>
+      ${progressBarHtml}
     `;
 
     // Close handler
@@ -72,11 +71,11 @@ const Toast = (() => {
 
   function del(uid) {
     const toast = toastMap.get(uid);
-    _dismiss(toast);
+    if (toast) _dismiss(toast);
   }
 
   function _dismiss(toast) {
-    if (toast.classList.contains('toast-hide')) return; // already dismissing
+    if (!toast || toast.classList.contains('toast-hide')) return; // already dismissing or null
     toast.classList.remove('toast-show');
     toast.classList.add('toast-hide');
     toast.addEventListener('animationend', () => toast.remove(), { once: true });
