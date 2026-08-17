@@ -314,7 +314,7 @@ const Cards = {
     card.addEventListener('click', (e) => {
       // 🛡️ Ignora el clic si fue dentro del botón del ojo
       if (longPress || e.target.closest('.btn-hentai-toggle')) return;
-      window.location.href = `./player.html?uid=${anime.id}&ep=${anime.episodioNum}`;
+      window.location.href = `/player/${anime.id}/${anime.episodioNum}`;
     });
 
     const placeholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';

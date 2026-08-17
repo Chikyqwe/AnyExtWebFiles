@@ -186,12 +186,12 @@ const Player = {
 
       ServerUI.setLoaderText(`Cargando ${data.Sserver.toUpperCase()}...`);
 
-      const mediaRes = await fetch(`https://anyext.qzz.io${data.url}`);
+      const mediaRes = await fetch(`${data.url}`);
       if (!mediaRes.ok) throw new Error('Error obteniendo media');
 
       if (data.mtype === 'hls') {
         const m3u8Content = await mediaRes.text();
-        await Stream.loadDirect(`https://anyext.qzz.io${data.url}`, m3u8Content);
+        await Stream.loadDirect(`/${data.url}`, m3u8Content);
       } else {
         const json = await mediaRes.json();
         await Stream.loadDirect(json.url);

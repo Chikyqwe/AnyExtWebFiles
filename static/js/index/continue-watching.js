@@ -37,7 +37,7 @@ const ContinueWatching = {
       console.error(e);
       imgEl.src = 'static/default-poster.jpg';
     }
-    btnEl.onclick = () => { window.location.href = `player?uid=${data.uid}&ep=${data.ep}`; };
+    btnEl.onclick = () => { window.location.href = `/${data.uid}/${data.ep}`; };
 
     new bootstrap.Modal(Utils.el('continueWatchingModal')).show();
   },

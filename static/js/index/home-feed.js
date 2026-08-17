@@ -154,7 +154,7 @@ const FeaturedBanner = {
 
           playBtn.onclick = () => {
             window.location.href =
-              `player.html?uid=${uid}&ep=${savedEp}`;
+              `/player/${uid}/${savedEp}`;
           };
 
         } else {
