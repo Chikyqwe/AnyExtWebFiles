@@ -20,11 +20,7 @@ const ContinueWatching = {
 
     titleEl.textContent = `${anime.title} — Episodio ${data.ep}`;
     try {
-      const res = await fetch(CONFIG.API.IMAGE, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ uid: anime.unit_id, type: 'cover' }),
-      });
+      const res = await fetch(`${CONFIG.API.IMAGE}?uid=${anime.unit_id}`);
 
       if (res.ok) {
         const blob = await res.blob();

@@ -90,11 +90,7 @@ const Modal = {
 
     // Imagen inicial rápida
     try {
-      const res = await fetch(CONFIG.API.IMAGE, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ uid: anime.unit_id, type: 'cover' }),
-      });
+      const res = await fetch(`${CONFIG.API.IMAGE}?uid=${anime.unit_id}`);
 
       if (res.ok) {
         const blob = await res.blob();
@@ -257,16 +253,24 @@ const Modal = {
     });
   },
 
+  _thumbnailsCache: {},
+
   async _loadEpThumb(imgEl, uid, epNum, type = 'ep') {
     const parent = imgEl.closest('.ep-thumb') || imgEl.parentElement;
     if (parent) parent.classList.add('img-loading-skeleton');
 
     try {
-      const res = await fetch(CONFIG.API.IMAGE, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ uid, type, ep: epNum }),
-      });
+      if (!this._thumbnailsCache[uid]) {
+        const thumbRes = await fetch(`${CONFIG.API.THUMBNAIL}?uid=${uid}`);
+        if (!thumbRes.ok) throw new Error('Failed to fetch thumbnails json');
+        const data = await thumbRes.json();
+        this._thumbnailsCache[uid] = data.imgs || [];
+      }
+      
+      const proxyUrl = this._thumbnailsCache[uid][epNum - 1];
+      if (!proxyUrl) throw new Error('Thumbnail not found');
+
+      const res = await fetch(proxyUrl);
 
       if (!res.ok) {
         if (parent) parent.classList.remove('img-loading-skeleton');

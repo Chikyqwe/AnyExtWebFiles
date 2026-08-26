@@ -45,11 +45,7 @@ const Cards = {
     const parent = imgElement.closest('.anime-card, .anime-card-init') || imgElement.parentElement;
     if (parent) parent.classList.add('img-loading-skeleton');
 
-    fetch(CONFIG.API.IMAGE, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: "cover", uid }),
-    })
+    fetch(`${CONFIG.API.IMAGE}?uid=${uid}`)
       .then(res => res.blob())
       .then(blob => {
         const url = URL.createObjectURL(blob);
